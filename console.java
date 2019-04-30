@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 /**
- * Classe especï¿½fica para realizar operaï¿½ï¿½es de entrada e saï¿½da de dados
+ * Classe espec�fica para realizar opera��es de entrada e sa�da de dados
  * no Console.
  * 
  * @author Andre Pimenta
@@ -13,7 +13,7 @@ public class Console {
 	private static Scanner scanner = new Scanner(System.in);
 
 	/**
-	 * Mï¿½todo para monstar menu para seleï¿½ï¿½o de opï¿½ï¿½es.
+	 * M�todo para monstar menu para sele��o de op��es.
 	 * 
 	 * @param opcoes
 	 * @param titulo
@@ -22,7 +22,7 @@ public class Console {
 	public static int mostrarMenu(String[] opcoes, String titulo, String descricao) {
 		int opcaoEscolhida = 0;
 		if (titulo == null) {
-			System.out.println("Por favor selecione uma opï¿½ï¿½o:");
+			System.out.println("Por favor selecione uma op��o:");
 		} else {
 			System.out.println(titulo);
 		}
@@ -42,15 +42,15 @@ public class Console {
 			}
 		} catch (Exception e) {
 			opcaoEscolhida = mostrarMenu(opcoes,
-					"Vocï¿½ selecionou um opï¿½ï¿½o invï¿½lida, por favor tente novamente.", descricao);
+					"Voc� selecionou um op��o inv�lida, por favor tente novamente.", descricao);
 		}
 		return opcaoEscolhida;
 	}
 
 	/**
-	 * Mï¿½todo especï¿½fico para realizar a captura de dados decimais no console.
+	 * M�todo espec�fico para realizar a captura de dados decimais no console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usuï¿½rio.
+	 * @param descricao textual do valor a ser informado pelo usu�rio.
 	 * @return
 	 */
 	public static Double recuperaDecimal(String descricao) {
@@ -64,9 +64,9 @@ public class Console {
 	}
 
 	/**
-	 * Mï¿½todo especï¿½fico para realizar a captura de dados inteiros no console.
+	 * M�todo espec�fico para realizar a captura de dados inteiros no console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usuï¿½rio.
+	 * @param descricao textual do valor a ser informado pelo usu�rio.
 	 * @return
 	 */
 	public static Integer recuperaInteiro(String descricao) {
@@ -81,10 +81,10 @@ public class Console {
 
 	/**
 	 * 
-	 * Mï¿½todo especï¿½fico para realizar a captura de dados inteiros positivos no
+	 * M�todo espec�fico para realizar a captura de dados inteiros positivos no
 	 * console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usuï¿½rio.
+	 * @param descricao textual do valor a ser informado pelo usu�rio.
 	 * @return
 	 */
 	public static Integer recuperaInteiroPositivo(String descricao) {
@@ -99,9 +99,9 @@ public class Console {
 	}
 
 	/**
-	 * Mï¿½todo especï¿½fico para realizar a captura de dados texto no console.
+	 * M�todo espec�fico para realizar a captura de dados texto no console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usuï¿½rio.
+	 * @param descricao textual do valor a ser informado pelo usu�rio.
 	 * @return
 	 */
 	public static String recuperaTexto(String descricao) {

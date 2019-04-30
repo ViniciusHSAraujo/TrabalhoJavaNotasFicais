@@ -1,7 +1,7 @@
 import java.sql.Date;
 
 /**
- * Fun√ß√£o que ir√° criar a nota fiscal
+ * FunÁ„o que ir· criar a nota fiscal
  * @author Augusto
  *
  */
