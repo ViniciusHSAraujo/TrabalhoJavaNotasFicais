@@ -11,10 +11,18 @@ public class NotaFiscal {
 	private String numero;
 	private String descricao;
 	private Date dataEmissao;
+	private Imposto imposto;
 	private Double valor;
 	private Double valorComImposto;
 	private Boolean cancelada;
 
+	public NotaFiscal(String numero, String descricao, Imposto imposto, Double valor) {
+		this.numero = numero;
+		this.descricao = descricao;
+		this.imposto = imposto;
+		this.valor = valor;
+	}
+	
 	public String getNumero() {
 		return numero;
 	}
@@ -55,4 +63,10 @@ public class NotaFiscal {
 		this.cancelada = cancelada;
 	}
 
+	@Override
+		public String toString() {
+			// TODO - FAZER O toString
+			return super.toString();
+		}
+	
 }
