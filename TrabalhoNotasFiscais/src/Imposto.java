@@ -1,4 +1,12 @@
-
+/**
+ * 
+ * Classe abstrata que representa o imposto.
+ * 
+ * @author Augusto César
+ * @author Paulo Henrique
+ * @author Vinícius Araújo
+ * 
+ */
 public abstract class Imposto {
 
 	private static Double aliquotaFederal = 0.15;

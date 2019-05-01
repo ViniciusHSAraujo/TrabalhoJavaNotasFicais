@@ -2,7 +2,11 @@ import java.util.ArrayList;
 
 /**
  * 
- * @author Augusto
+ * Classe que representa a empresa
+ * 
+ * @author Augusto César
+ * @author Paulo Henrique
+ * @author Vinícius Araújo
  *
  */
 public class Empresa {
