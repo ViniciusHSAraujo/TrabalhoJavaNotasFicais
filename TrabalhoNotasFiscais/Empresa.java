@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Augusto
  *
  */
-public class Empresa{
+public class Empresa {
 
 	public Empresa(String nome, String cnpj) {
 

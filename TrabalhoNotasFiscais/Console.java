@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 /**
- * Classe espec�fica para realizar opera��es de entrada e sa�da de dados
+ * Classe específica para realizar opera��es de entrada e sa�da de dados
  * no Console.
  * 
  * @author Andre Pimenta
@@ -64,9 +64,9 @@ public class Console {
 	}
 
 	/**
-	 * M�todo espec�fico para realizar a captura de dados inteiros no console.
+	 * Método específico para realizar a captura de dados inteiros no console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usu�rio.
+	 * @param descricao textual do valor a ser informado pelo usuário.
 	 * @return
 	 */
 	public static Integer recuperaInteiro(String descricao) {
@@ -81,10 +81,10 @@ public class Console {
 
 	/**
 	 * 
-	 * M�todo espec�fico para realizar a captura de dados inteiros positivos no
+	 * Método específico para realizar a captura de dados inteiros positivos no
 	 * console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usu�rio.
+	 * @param descricao textual do valor a ser informado pelo usuário.
 	 * @return
 	 */
 	public static Integer recuperaInteiroPositivo(String descricao) {
@@ -99,9 +99,9 @@ public class Console {
 	}
 
 	/**
-	 * M�todo espec�fico para realizar a captura de dados texto no console.
+	 * Método específico para realizar a captura de dados texto no console.
 	 * 
-	 * @param descricao textual do valor a ser informado pelo usu�rio.
+	 * @param descricao textual do valor a ser informado pelo usuário.
 	 * @return
 	 */
 	public static String recuperaTexto(String descricao) {
