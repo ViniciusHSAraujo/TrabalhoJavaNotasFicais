@@ -60,4 +60,18 @@ public class Empresa {
 			return false;
 		return true;
 	}
+	
+	public ArrayList<NotaFiscal> getNotasFiscaisValidas() {
+		ArrayList<NotaFiscal> notasValidas = new ArrayList<>();
+		for (NotaFiscal notaFiscal : this.notas) {
+			//TODO Para cada nota fiscal no array de notas da empresa que o 'cancelada' for false, jogue no array notasValidas.
+		}
+	}
+
+	public ArrayList<NotaFiscal> getNotasFiscaisCanceladas() {
+		ArrayList<NotaFiscal> notasCanceladas = new ArrayList<>();
+		for (NotaFiscal notaFiscal : this.notas) {
+			//TODO Para cada nota fiscal no array de notas da empresa que o 'cancelada' for true, jogue no array notasCanceladas.
+		}
+	}
 }
