@@ -48,6 +48,37 @@ public class Console {
 	}
 
 	/**
+	 * M�todo para monstar menu para sele��o de op��es, sem a opcao de voltar.
+	 * 
+	 * @param opcoes
+	 * @param titulo
+	 * @return
+	 */
+	public static int mostrarMenuSemVoltar(String[] opcoes, String titulo, String descricao) {
+		int opcaoEscolhida = 0;
+		if (titulo == null) {
+			System.out.println("Por favor selecione uma op��o:");
+		} else {
+			System.out.println(titulo);
+		}
+
+		for (int i = 0; i < opcoes.length; i++) {
+			System.out.println(i + 1 + ") " + opcoes[i]);
+		}
+		if (descricao == null) {
+		} else {
+			System.out.println(opcoes.length + 1 + ") " + descricao + ".");
+		}
+		try {
+			opcaoEscolhida = recuperaInteiroPositivo(descricao);
+		} catch (Exception e) {
+			opcaoEscolhida = mostrarMenu(opcoes,
+					"Voc� selecionou um op��o inv�lida, por favor tente novamente.", descricao);
+		}
+		return opcaoEscolhida;
+	}
+	
+	/**
 	 * M�todo espec�fico para realizar a captura de dados decimais no console.
 	 * 
 	 * @param descricao textual do valor a ser informado pelo usu�rio.

@@ -8,7 +8,7 @@ import java.sql.Date;
  */
 public class NotaFiscal {
 
-	private String numero;
+	private Integer numero;
 	private String descricao;
 	private Date dataEmissao;
 	private Imposto imposto;
@@ -16,18 +16,18 @@ public class NotaFiscal {
 	private Double valorComImposto;
 	private Boolean cancelada;
 
-	public NotaFiscal(String numero, String descricao, Imposto imposto, Double valor) {
+	public NotaFiscal(Integer numero, String descricao, Imposto imposto, Double valor) {
 		this.numero = numero;
 		this.descricao = descricao;
 		this.imposto = imposto;
 		this.valor = valor;
 	}
 	
-	public String getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 

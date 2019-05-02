@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 public class Principal {
 
@@ -29,7 +28,7 @@ public class Principal {
 
 		// System.out.println(e1.equals(e2));
 
-		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa" };
+		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal" };
 
 		Boolean continuar = true;
 
@@ -50,9 +49,8 @@ public class Principal {
 				listarEmpresas();
 				break;
 			case 3:
-				String cnpj = Console.recuperaTexto("Informe o CNPJ da empresa que deseja excluir:");
 				try {
-					Empresa empresaASerExcluida = encontrarEmpresaPeloCNPJ(cnpj);
+					Empresa empresaASerExcluida = encontrarEmpresaPeloCNPJ();
 					excluirEmpresa(empresaASerExcluida);
 					System.out.println("Empresa excluída com sucesso!");
 				} catch (Excessao e) {
@@ -60,6 +58,15 @@ public class Principal {
 				}
 				break;
 			case 4:
+				try {
+					Empresa empresaLancamentoNota = encontrarEmpresaPeloCNPJ();
+					NotaFiscal notaFiscalGerada = gerarNotaFiscal();
+
+					empresaLancamentoNota.notas.add(notaFiscalGerada);
+					System.out.println("Nota Fiscal Autorizada e Processada com Sucesso!");
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 5:
 				break;
@@ -101,7 +108,8 @@ public class Principal {
 		}
 	}
 
-	private static Empresa encontrarEmpresaPeloCNPJ(String cnpj) throws Excessao {
+	private static Empresa encontrarEmpresaPeloCNPJ() throws Excessao {
+		String cnpj = Console.recuperaTexto("Informe o CNPJ da empresa:");
 		for (Empresa empresa : empresas) {
 			if (empresa.getCnpj().equalsIgnoreCase(cnpj)) {
 				return empresa;
@@ -111,12 +119,48 @@ public class Principal {
 	}
 
 	private static void excluirEmpresa(Empresa empresaASerExcluida) throws Excessao {
-
 		if (empresaASerExcluida.getNotasFiscaisValidas().size() > 0) {
 			throw new Excessao("A empresa contém notas fiscais válidas.\n"
 					+ "Faça o cancelamento das mesmas para realizar a exclusão da empresa.");
 		} else {
 			empresas.remove(empresaASerExcluida);
 		}
+	}
+
+	private static NotaFiscal gerarNotaFiscal() {
+
+		String descricao = Console.recuperaTexto("Digite o CFOP (Motivo da Nota Fiscal):");
+		double valor = Console.recuperaDecimal("Digite o valor monetário da Nota Fiscal:");
+		int numero = Console.recuperaInteiro("Digite o número da Nota Fiscal:");
+		Imposto imposto = verificarEstado(valor);
+		NotaFiscal notaFiscal = new NotaFiscal(numero, descricao, imposto, valor);
+
+		return notaFiscal;
+
+	}
+
+	private static Imposto verificarEstado(Double valor) {
+		String[] UFs = { "Paraná", "Santa Catarina", "São Paulo" };
+
+		Boolean continuar = true;
+
+		do {
+			int opcao = Console.mostrarMenuSemVoltar(UFs, "Escolha o estado destino da Nota Fiscal:", null);
+
+			switch (opcao) {
+			case 1:
+				Imposto impostoParana = new ImpostoParana(valor);
+				return impostoParana;
+			case 2:
+				Imposto impostoSantaCatarina = new ImpostoSantaCatarina(valor);
+				return impostoSantaCatarina;
+			case 3:
+				Imposto impostoSaoPaulo = new ImpostoSaoPaulo(valor);
+				return impostoSaoPaulo;
+			}
+
+		} while (continuar);
+		// NUNCA VAI CAIR AQUI, COLOQUEI SÓ PRO JAVA COMPILAR
+		return null;
 	}
 }
