@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Principal {
 
@@ -28,7 +29,7 @@ public class Principal {
 
 		// System.out.println(e1.equals(e2));
 
-		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa"};
+		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa" };
 
 		Boolean continuar = true;
 
@@ -49,9 +50,11 @@ public class Principal {
 				listarEmpresas();
 				break;
 			case 3:
-				Empresa empresaASerExcluida = criarEmpresaSoComCNPJ();
+				String cnpj = Console.recuperaTexto("Informe o CNPJ da empresa que deseja excluir:");
 				try {
+					Empresa empresaASerExcluida = encontrarEmpresaPeloCNPJ(cnpj);
 					excluirEmpresa(empresaASerExcluida);
+					System.out.println("Empresa excluída com sucesso!");
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
@@ -91,31 +94,29 @@ public class Principal {
 		}
 		empresas.add(novaEmpresa);
 	}
-	
+
 	private static void listarEmpresas() {
 		for (Empresa empresa : empresas) {
 			System.out.println(empresa);
 		}
 	}
-	
-	private static Empresa criarEmpresaSoComCNPJ() {
-		String cnpj = Console.recuperaTexto("Informe o CNPJ da empresa que você deseja excluir: ");
-		Empresa empresaSoComCNPJ = new Empresa(cnpj);
-		
-		return empresaSoComCNPJ;
-	}
-	
-	private static void excluirEmpresa(Empresa empresaASerExcluida) throws Excessao {
+
+	private static Empresa encontrarEmpresaPeloCNPJ(String cnpj) throws Excessao {
 		for (Empresa empresa : empresas) {
-			if (empresaASerExcluida == empresa) {
-				empresaASerExcluida = empresa;
+			if (empresa.getCnpj().equalsIgnoreCase(cnpj)) {
+				return empresa;
 			}
-			if (empresa.getNotasFiscaisValidas().size() > 0) {
-				throw new Excessao("A empresa contém notas fiscais válidas.\n"
-								 + "Faça o cancelamento das mesmas para realizar a exclusão da empresa.");
-			}else {
-				empresas.remove(empresaASerExcluida);
-			}
+		}
+		throw new Excessao("Empresa não encontrada! [404]");
+	}
+
+	private static void excluirEmpresa(Empresa empresaASerExcluida) throws Excessao {
+
+		if (empresaASerExcluida.getNotasFiscaisValidas().size() > 0) {
+			throw new Excessao("A empresa contém notas fiscais válidas.\n"
+					+ "Faça o cancelamento das mesmas para realizar a exclusão da empresa.");
+		} else {
+			empresas.remove(empresaASerExcluida);
 		}
 	}
 }
