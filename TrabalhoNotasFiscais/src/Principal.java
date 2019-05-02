@@ -28,7 +28,7 @@ public class Principal {
 
 		// System.out.println(e1.equals(e2));
 
-		String[] opcoes = { "Opção 01", "Opção 02" };
+		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa"};
 
 		Boolean continuar = true;
 
@@ -41,13 +41,20 @@ public class Principal {
 				try {
 					cadastrarEmpresa(novaEmpresa);
 					System.out.println("Empresa cadastrada com sucesso!");
-				} catch (EmpresaJaCadastrada e) {
-					System.out.println("Erro na operação: " + e.getMessage());
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
 				}
 				break;
 			case 2:
+				listarEmpresas();
 				break;
 			case 3:
+				Empresa empresaASerExcluida = criarEmpresaSoComCNPJ();
+				try {
+					excluirEmpresa(empresaASerExcluida);
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 4:
 				break;
@@ -76,12 +83,39 @@ public class Principal {
 		return new Empresa(nome, cnpj);
 	}
 
-	private static void cadastrarEmpresa(Empresa novaEmpresa) throws EmpresaJaCadastrada {
+	private static void cadastrarEmpresa(Empresa novaEmpresa) throws Excessao {
 		for (Empresa empresa : empresas) {
 			if (empresa.equals(novaEmpresa)) {
-				throw new EmpresaJaCadastrada("CNPJ existente");
+				throw new Excessao("CNPJ existente");
 			}
 		}
 		empresas.add(novaEmpresa);
+	}
+	
+	private static void listarEmpresas() {
+		for (Empresa empresa : empresas) {
+			System.out.println(empresa);
+		}
+	}
+	
+	private static Empresa criarEmpresaSoComCNPJ() {
+		String cnpj = Console.recuperaTexto("Informe o CNPJ da empresa que você deseja excluir: ");
+		Empresa empresaSoComCNPJ = new Empresa(cnpj);
+		
+		return empresaSoComCNPJ;
+	}
+	
+	private static void excluirEmpresa(Empresa empresaASerExcluida) throws Excessao {
+		for (Empresa empresa : empresas) {
+			if (empresaASerExcluida == empresa) {
+				empresaASerExcluida = empresa;
+			}
+			if (empresa.getNotasFiscaisValidas().size() > 0) {
+				throw new Excessao("A empresa contém notas fiscais válidas.\n"
+								 + "Faça o cancelamento das mesmas para realizar a exclusão da empresa.");
+			}else {
+				empresas.remove(empresaASerExcluida);
+			}
+		}
 	}
 }

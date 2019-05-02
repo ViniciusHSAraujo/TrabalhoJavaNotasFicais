@@ -1,7 +1,7 @@
 import java.sql.Date;
 
 /**
- * Função que irá criar a nota fiscal
+ * Classe que representa a Nota Fiscal
  * 
  * @author Augusto
  *
@@ -55,7 +55,7 @@ public class NotaFiscal {
 		this.valor = valor;
 	}
 
-	public Boolean getCancelada() {
+	public Boolean isCancelada() {
 		return cancelada;
 	}
 

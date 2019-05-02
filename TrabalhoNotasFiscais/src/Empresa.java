@@ -4,13 +4,18 @@ import java.util.ArrayList;
  * 
  * Classe que representa a empresa
  * 
- * @author Augusto César
+ * @author Augusto Cï¿½sar
  * @author Paulo Henrique
- * @author Vinícius Araújo
+ * @author Vinï¿½cius Araï¿½jo
  *
  */
 public class Empresa {
 
+	/**
+	 * Construtor de uma empresa completa, com nome e CNPJ.
+	 * @param nome
+	 * @param cnpj
+	 */
 	public Empresa(String nome, String cnpj) {
 
 		this.nome = nome;
@@ -18,7 +23,15 @@ public class Empresa {
 
 		this.notas = new ArrayList<NotaFiscal>();
 	}
+	/**
+	 * Construtor de uma empresa somente com o CNPJ, utilizado na exclusÃ£o da empresa.
+	 * @param cnpj
+	 */
+	public Empresa(String cnpj) {
 
+		this.cnpj = cnpj;
+	}
+	
 	private String nome;
 	private String cnpj;
 
@@ -81,5 +94,13 @@ public class Empresa {
 			// true, jogue no array notasCanceladas.
 		}
 		return notasCanceladas;
+	}
+	
+	@Override
+	public String toString() {
+		String empresa = "\n" +
+						 "Nome da Empresa: " + this.nome + "\n" + 
+						 "CNPJ: " + this.cnpj + "\n\n";
+		return empresa;
 	}
 }
