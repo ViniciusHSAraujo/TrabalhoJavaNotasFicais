@@ -2,8 +2,8 @@
 import java.util.Scanner;
 
 /**
- * Classe específica para realizar opera��es de entrada e sa�da de dados
- * no Console.
+ * Classe específica para realizar opera��es de entrada e sa�da de dados no
+ * Console.
  * 
  * @author Andre Pimenta
  * 
@@ -41,8 +41,8 @@ public class Console {
 				return -1;
 			}
 		} catch (Exception e) {
-			opcaoEscolhida = mostrarMenu(opcoes,
-					"Voc� selecionou um op��o inv�lida, por favor tente novamente.", descricao);
+			opcaoEscolhida = mostrarMenu(opcoes, "Voc� selecionou um op��o inv�lida, por favor tente novamente.",
+					descricao);
 		}
 		return opcaoEscolhida;
 	}
@@ -72,12 +72,12 @@ public class Console {
 		try {
 			opcaoEscolhida = recuperaInteiroPositivo(descricao);
 		} catch (Exception e) {
-			opcaoEscolhida = mostrarMenu(opcoes,
-					"Voc� selecionou um op��o inv�lida, por favor tente novamente.", descricao);
+			opcaoEscolhida = mostrarMenu(opcoes, "Voc� selecionou um op��o inv�lida, por favor tente novamente.",
+					descricao);
 		}
 		return opcaoEscolhida;
 	}
-	
+
 	/**
 	 * M�todo espec�fico para realizar a captura de dados decimais no console.
 	 * 

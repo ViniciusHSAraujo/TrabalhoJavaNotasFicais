@@ -2,32 +2,27 @@
  * 
  * Classe abstrata que representa o imposto.
  * 
- * @author Augusto César
+ * @author Augusto Cï¿½sar
  * @author Paulo Henrique
- * @author Vinícius Araújo
+ * @author Vinï¿½cius Araï¿½jo
  * 
  */
 public abstract class Imposto {
+	
+	private static Double ALIQUOTA_FEDERAL = 0.15;
 
-	private static Double aliquotaFederal = 0.15;
-	private Double valor;
-
-	public Double getValor() {
-		return valor;
-	}
+	protected Double valor;
 
 	public Imposto(Double valor) {
 		this.valor = valor;
 	}
 
 	public double calcularImpostoTotal() {
-		double impostoFederal = calcularImpostoFederal();
-		double impostoEstadual = calcularImpostoEstadual();
-		return impostoEstadual + impostoFederal;
+		return calcularImpostoFederal() + calcularImpostoEstadual();
 	}
 
 	public double calcularImpostoFederal() {
-		return this.valor * aliquotaFederal;
+		return this.valor * ALIQUOTA_FEDERAL;
 	}
 
 	public abstract double calcularImpostoEstadual();

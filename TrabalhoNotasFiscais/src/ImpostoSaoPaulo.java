@@ -1,16 +1,16 @@
 /**
  * 
- * Classe que representa o imposto do Estado de São Paulo
+ * Classe que representa o imposto do Estado de Sï¿½o Paulo
  * 
- * @author Augusto César
+ * @author Augusto Cï¿½sar
  * @author Paulo Henrique
- * @author Vinícius Araújo
+ * @author Vinï¿½cius Araï¿½jo
  *
  */
 public class ImpostoSaoPaulo extends Imposto {
 
 	/**
-	 * Alíquota Estadual do Estado de São Paulo: 18%
+	 * Alï¿½quota Estadual do Estado de Sï¿½o Paulo: 18%
 	 */
 	public static double aliquotaEstadual = 0.18;
 
@@ -19,7 +19,6 @@ public class ImpostoSaoPaulo extends Imposto {
 	}
 
 	public double calcularImpostoEstadual(){
-		double valor = getValor();
-		return valor * aliquotaEstadual;
+		return this.valor * aliquotaEstadual;
 	}
 }

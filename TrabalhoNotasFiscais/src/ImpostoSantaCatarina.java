@@ -1,15 +1,15 @@
 /**
   * Classe que representa o imposto do Estado de Santa Catarina
  * 
- * @author Augusto César
+ * @author Augusto Cï¿½sar
  * @author Paulo Henrique
- * @author Vinícius Araújo
+ * @author Vinï¿½cius Araï¿½jo
  *
  */
 public class ImpostoSantaCatarina extends Imposto {
 
 	/**
-	 * Alíquota Estadual do Estado de Santa Catarina: 10%
+	 * Alï¿½quota Estadual do Estado de Santa Catarina: 10%
 	 */
 	public static double aliquotaEstadual = 0.10;
 
@@ -19,7 +19,6 @@ public class ImpostoSantaCatarina extends Imposto {
 	}
 	
 	public double calcularImpostoEstadual(){
-		double valor = getValor();
-		return valor * aliquotaEstadual;
+		return this.valor * aliquotaEstadual;
 	}
 }

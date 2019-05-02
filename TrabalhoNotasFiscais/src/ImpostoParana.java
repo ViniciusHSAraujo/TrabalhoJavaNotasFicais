@@ -19,6 +19,6 @@ public class ImpostoParana extends Imposto {
 	}
 	
 	public double calcularImpostoEstadual(){
-		return getValor() * aliquotaEstadual;
+		return this.valor * aliquotaEstadual;
 	}
 }
