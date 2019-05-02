@@ -19,10 +19,12 @@ public class NotaFiscal {
 	public NotaFiscal(Integer numero, String descricao, Imposto imposto, Double valor) {
 		this.numero = numero;
 		this.descricao = descricao;
-		this.imposto = imposto;
+		this.setImposto(imposto);
 		this.valor = valor;
+		this.cancelada = false;
+		this.valorComImposto = valor + imposto.calcularImpostoTotal();
 	}
-	
+
 	public Integer getNumero() {
 		return numero;
 	}
@@ -63,10 +65,37 @@ public class NotaFiscal {
 		this.cancelada = cancelada;
 	}
 
+	public Imposto getImposto() {
+		return imposto;
+	}
+
+	public void setImposto(Imposto imposto) {
+		this.imposto = imposto;
+	}
+
+	public Double getValorComImposto() {
+		return valorComImposto;
+	}
+
+	public void setValorComImposto(Double valorComImposto) {
+		this.valorComImposto = valorComImposto;
+	}
+
 	@Override
-		public String toString() {
-			// TODO - FAZER O toString
-			return super.toString();
-		}
-	
+	public String toString() {
+		
+		String situacao = (isCancelada()) ? "Cancelada" : "Autorizada"; 
+		
+		String notaFiscalEmTexto = "\n"
+								+  "Número da Nota: " + this.numero + "\n"
+								+  "Descrição/Motivo: " + this.descricao + "\n"
+								+  "Valor da nota: " + this.valor + "\n"
+								+  "Imposto Federal: " + this.imposto.calcularImpostoFederal() + "\n"
+								+  "Imposto Estadual: " + this.imposto.calcularImpostoEstadual() + "\n"
+								+  "Valor com os Impostos: " + this.valorComImposto + "\n"
+								+  "Situação: " + situacao + "\n";
+		
+		return notaFiscalEmTexto;
+
+	}
 }

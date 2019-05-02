@@ -1,16 +1,16 @@
 /**
  * 
- * Classe que representa o imposto do Estado do Paraná
+ * Classe que representa o imposto do Estado do Paranï¿½
  * 
- * @author Augusto César
+ * @author Augusto Cï¿½sar
  * @author Paulo Henrique
- * @author Vinícius Araújo
+ * @author Vinï¿½cius Araï¿½jo
  *
  */
 public class ImpostoParana extends Imposto {
 	
 	/**
-	 * Alíquota Estadual do Estado do Paraná: 5%
+	 * Alï¿½quota Estadual do Estado do Paranï¿½: 5%
 	 */
 	public static double aliquotaEstadual = 0.05;
 
@@ -19,7 +19,6 @@ public class ImpostoParana extends Imposto {
 	}
 	
 	public double calcularImpostoEstadual(){
-		double valor = getValor();
-		return valor * aliquotaEstadual;
+		return getValor() * aliquotaEstadual;
 	}
 }

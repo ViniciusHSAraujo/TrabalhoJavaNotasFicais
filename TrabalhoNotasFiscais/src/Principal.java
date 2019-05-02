@@ -64,6 +64,7 @@ public class Principal {
 
 					empresaLancamentoNota.notas.add(notaFiscalGerada);
 					System.out.println("Nota Fiscal Autorizada e Processada com Sucesso!");
+					System.out.println(notaFiscalGerada);
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
