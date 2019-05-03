@@ -67,6 +67,7 @@ public class Principal {
 					Integer numeroDaNota = Console.recuperaInteiro("Digite o número da nota que deseja cancelar:");
 					NotaFiscal notaCancelamento = encontrarNotaFiscal(empresaDaNota, numeroDaNota);
 					notaCancelamento.setCancelada(true);
+					System.out.println("Nota cancelada com sucesso!");
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
