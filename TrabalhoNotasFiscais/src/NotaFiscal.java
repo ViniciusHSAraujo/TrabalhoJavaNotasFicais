@@ -4,7 +4,9 @@ import java.util.Date;
 /**
  * Classe que representa a Nota Fiscal.
  * 
- * @author Augusto
+ * @author Augusto C�sar
+ * @author Paulo Henrique
+ * @author Vin�cius Ara�jo
  *
  */
 public class NotaFiscal implements Comparable<NotaFiscal> {

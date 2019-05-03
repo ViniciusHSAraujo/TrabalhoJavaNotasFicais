@@ -4,7 +4,9 @@ import java.util.Date;
 /**
  * Classe principal onde roda todas as funcionalidades do sistema
  * 
- * @author ViníciusAraújo
+ * @author Augusto C�sar
+ * @author Paulo Henrique
+ * @author Vin�cius Ara�jo
  *
  */
 public class Principal {
@@ -14,28 +16,8 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		// Empresa e1 = new Empresa("e1", "124");
-		//
-		// Empresa e2 = new Empresa("e2", "123");
-		//
-		// empresas.add(e1);
-		// empresas.add(e2);
-		//
-		// System.out.println(empresas);
-		//
-		// Empresa e3 = new Empresa("e3", "123");
-		//
-		// System.out.println(empresas.contains(e3));
-		//
-		// empresas.remove(e3);
-		//
-		// System.out.println(empresas);
-		//
-		// empresas.removeIf(e -> e.getNome().equals("e1"));
-
-		// System.out.println(e1.equals(e2));
-
-		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal", "Cancelar Nota Fiscal" };
+		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal",
+				"Cancelar Nota Fiscal" };
 
 		Boolean continuar = true;
 
@@ -78,14 +60,13 @@ public class Principal {
 				}
 				break;
 			case 5:
-				// CANCELAR NOTA FISCAL
 				try {
 					Empresa empresaDaNota = encontrarEmpresaPeloCNPJ();
 					System.out.println("Segue abaixo relação de Notas Fiscais dessa empresa:");
 					listarNotasFiscais(empresaDaNota);
 					Integer numeroDaNota = Console.recuperaInteiro("Digite o número da nota que deseja cancelar:");
 					NotaFiscal notaCancelamento = encontrarNotaFiscal(empresaDaNota, numeroDaNota);
-					cancelarNotaFiscal(empresaDaNota, notaCancelamento);
+					notaCancelamento.setCancelada(true);
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
@@ -108,12 +89,27 @@ public class Principal {
 		} while (continuar);
 	}
 
+	/**
+	 * Método criado para criar uma empresa com o Nome e CNPJ
+	 * 
+	 * @return uma empresa com o nome e CNPJ.
+	 */
 	private static Empresa criarEmpresa() {
 		String nome = Console.recuperaTexto("Insira o nome da empresa:");
 		String cnpj = Console.recuperaTexto("Insira o CNPJ da empresa:");
 		return new Empresa(nome, cnpj);
 	}
 
+	/**
+	 * Método que recebe uma empresa e verifica se ela deve ou não ser cadastrada no
+	 * sistema. Seu funcionamento se dá pela verificação se a empresa já existe,
+	 * caso não, ele cadastra no array "empresas", senão, retorna um erro informando
+	 * que o CNPJ já está cadastrado em outra empresa.
+	 * 
+	 * @param novaEmpresa - Empreas a ser cadastrada
+	 * @throws Excessao - Caso o CNPJ já esteja cadastrado, retorna a mensagem "CNPJ
+	 *                  Existente".
+	 */
 	private static void cadastrarEmpresa(Empresa novaEmpresa) throws Excessao {
 		for (Empresa empresa : empresas) {
 			if (empresa.equals(novaEmpresa)) {
@@ -123,12 +119,24 @@ public class Principal {
 		empresas.add(novaEmpresa);
 	}
 
+	/**
+	 * Método que varre o array "empresas" e imprime na tela cada uma delas.
+	 */
 	private static void listarEmpresas() {
 		for (Empresa empresa : empresas) {
 			System.out.println(empresa);
 		}
 	}
 
+	/**
+	 * Método que pergunta qual o CNPJ da empresa que o usuário está buscando e
+	 * realiza uma varredura no array "empresas" buscando a empresa do CNPJ
+	 * informado.
+	 * 
+	 * @return - A empresa com o CNPJ informado pelo cliente.
+	 * @throws Excessao - Caso não exista a empresa, ele retorna um erro informando
+	 *                  que a empesa não foi encontrada.
+	 */
 	private static Empresa encontrarEmpresaPeloCNPJ() throws Excessao {
 		String cnpj = Console.recuperaTexto("Informe o CNPJ da empresa:");
 		for (Empresa empresa : empresas) {
@@ -139,6 +147,13 @@ public class Principal {
 		throw new Excessao("Empresa não encontrada! [404]");
 	}
 
+	/**
+	 * Método criado para excluir uma empresa do sistema. Seu funcionamento se dá
+	 * por meio do
+	 * 
+	 * @param empresaASerExcluida
+	 * @throws Excessao
+	 */
 	private static void excluirEmpresa(Empresa empresaASerExcluida) throws Excessao {
 		if (empresaASerExcluida.getNotasFiscaisValidas().size() > 0) {
 			throw new Excessao("A empresa contém notas fiscais válidas.\n"
@@ -148,6 +163,11 @@ public class Principal {
 		}
 	}
 
+	/**
+	 * Método que coleta as informações e gera a nota fiscal.
+	 * 
+	 * @return - Uma nota fiscal com as informações necessárias para o sistema.
+	 */
 	private static NotaFiscal gerarNotaFiscal() {
 
 		String descricao = Console.recuperaTexto("Digite o Motivo da Nota Fiscal:");
@@ -160,6 +180,16 @@ public class Principal {
 
 	}
 
+	/**
+	 * Método que verifica se a numeração da Nota Fiscal já foi utilizada por outra
+	 * nota na mesma empresa, evitando duplicidade.
+	 * 
+	 * @param novaNotaFiscal    - Nota Fiscal a ser incluída na empresa.
+	 * @param empresaLancamento - Empresa na qual a nota fiscal será incluída.
+	 * @throws Excessao - Caso a numeração já tenha sido utilizada, o sistema
+	 *                  retorna uma mensagem informando que o número já foi
+	 *                  utilizado.
+	 */
 	private static void verificarNumeracao(NotaFiscal novaNotaFiscal, Empresa empresaLancamento) throws Excessao {
 		for (NotaFiscal notaFiscal : empresaLancamento.notas) {
 			if (notaFiscal.equals(novaNotaFiscal)) {
@@ -169,6 +199,12 @@ public class Principal {
 		empresaLancamento.notas.add(novaNotaFiscal);
 	}
 
+	/**
+	 * Método que varre o array de Notas Fiscais de uma empresa e imprime na tela
+	 * cada uma delas.
+	 * 
+	 * @param empresa - A empresa em que o sistema verificará as notas fiscais.
+	 */
 	private static void listarNotasFiscais(Empresa empresa) {
 		System.out.println("--------------------------------");
 		for (NotaFiscal notaFiscal : empresa.notas) {
@@ -177,7 +213,17 @@ public class Principal {
 		}
 		System.out.println("\n");
 	}
-	
+
+	/**
+	 * Método que busca uma nota fiscal pelo número dela em uma empresa.
+	 * 
+	 * @param empresaDaNota - Empresa em que o sistema procurará pela nota.
+	 * @param numeroDaNota  - Número da nota que o sistema deve procurar.
+	 * @return - Nota Fiscal com o número solicitado pelo usuário.
+	 * @throws Excessao - Caso não haja nenhuma nota na empresa com tal numeração, o
+	 *                  sistema retorna informando que não encontrou nenhuma nota
+	 *                  com tal numeração.
+	 */
 	private static NotaFiscal encontrarNotaFiscal(Empresa empresaDaNota, Integer numeroDaNota) throws Excessao {
 		for (NotaFiscal notaFiscal : empresaDaNota.notas) {
 			if (notaFiscal.getNumero() == numeroDaNota) {
@@ -186,11 +232,17 @@ public class Principal {
 		}
 		throw new Excessao("Nota fiscal não encontrada.");
 	}
-	
-	private static void cancelarNotaFiscal(Empresa empresaDaNota, NotaFiscal notaCancelamento) {
-		empresaDaNota.notas.remove(notaCancelamento);
-	}
-	
+
+	/**
+	 * Verifica o estado para o qual a nota será emitida e retorna o imposto de tal
+	 * estado.
+	 * 
+	 * @param valor - Valor da nota para realização do cálculo do imposto.
+	 * @return - Retorna o imposto para o estado escolhido. OBS: Tem um 'return
+	 *         null' que foi utilizado somente para o Java compilar, pois o sistema
+	 *         ficará no do while e retornará o imposto de algum estado, porém o
+	 *         Java não entende isso.
+	 */
 	private static Imposto verificarEstado(Double valor) {
 		String[] UFs = { "Paraná", "Santa Catarina", "São Paulo" };
 
