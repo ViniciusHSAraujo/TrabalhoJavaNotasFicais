@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Classe principal onde roda todas as funcionalidades do sistema
@@ -17,7 +16,7 @@ public class Principal {
 	public static void main(String[] args) {
 
 		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal",
-				"Cancelar Nota Fiscal" };
+				"Cancelar Nota Fiscal", "Relatório: Notas Fiscais por Empresa", "Relatório: Notas Fiscais Canceladas por Empresa" };
 
 		Boolean continuar = true;
 
@@ -74,8 +73,22 @@ public class Principal {
 
 				break;
 			case 6:
+				try {
+					Empresa empresaDaNota = encontrarEmpresaPeloCNPJ();
+					listarNotasFiscais(empresaDaNota);
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
+				;
 				break;
 			case 7:
+				try {
+					Empresa empresaDaNota = encontrarEmpresaPeloCNPJ();
+					listarNotasFiscaisCanceladas(empresaDaNota);
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
+				;
 				break;
 			case 8:
 				break;
@@ -145,7 +158,7 @@ public class Principal {
 				return empresa;
 			}
 		}
-		throw new Excessao("Empresa não encontrada! [404]");
+		throw new Excessao("Empresa não encontrada!");
 	}
 
 	/**
@@ -216,6 +229,22 @@ public class Principal {
 	}
 
 	/**
+	 * Método que varre o array de Notas Fiscais de uma empresa e imprime na tela
+	 * cada uma delas.
+	 * 
+	 * @param empresa - A empresa em que o sistema verificará as notas fiscais.
+	 */
+	private static void listarNotasFiscaisCanceladas(Empresa empresa) {
+		System.out.println("Notas Fiscais Canceladas:\n\n");
+		System.out.println("--------------------------------");
+		for (NotaFiscal notaFiscal : empresa.getNotasFiscaisCanceladas()) {
+			System.out.println(notaFiscal);
+			System.out.println("--------------------------------");
+		}
+		System.out.println("\n");
+	}
+	
+	/**
 	 * Método que busca uma nota fiscal pelo número dela em uma empresa.
 	 * 
 	 * @param empresaDaNota - Empresa em que o sistema procurará pela nota.
@@ -267,5 +296,5 @@ public class Principal {
 		} while (continuar);
 		return null; // NUNCA VAI CAIR AQUI, COLOQUEI SÓ PRO JAVA COMPILAR
 	}
-
+	
 }

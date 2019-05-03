@@ -128,11 +128,16 @@ public class NotaFiscal implements Comparable<NotaFiscal> {
 
 	}
 
-	// implementar depois
+	// TODO - Implementar CompareTo para que seja feita a ordenação por valor.
 	@Override
 	public int compareTo(NotaFiscal o) {
-		if (this.valor > o.valor) {
-		}
+//	if (this.valor > o.valor) {
+//		return 1;
+//	} else if (this.valor < o.valor) {
+//		return -1;
+//	} else {
 		return 0;
 	}
+
+
 }
