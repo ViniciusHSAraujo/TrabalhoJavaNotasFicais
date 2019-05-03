@@ -1,4 +1,5 @@
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Classe que representa a Nota Fiscal.
@@ -6,7 +7,7 @@ import java.sql.Date;
  * @author Augusto
  *
  */
-public class NotaFiscal {
+public class NotaFiscal implements Comparable<NotaFiscal> {
 
 	private Integer numero;
 	private String descricao;
@@ -21,6 +22,7 @@ public class NotaFiscal {
 		this.descricao = descricao;
 		this.setImposto(imposto);
 		this.valor = valor;
+		this.dataEmissao = new Date();
 		this.cancelada = false;
 		this.valorComImposto = valor + imposto.calcularImpostoTotal();
 	}
@@ -82,20 +84,53 @@ public class NotaFiscal {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NotaFiscal other = (NotaFiscal) obj;
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		
-		String situacao = (isCancelada()) ? "Cancelada" : "Autorizada"; 
-		
-		String notaFiscalEmTexto = "\n"
-								+  "Número da Nota: " + this.numero + "\n"
-								+  "Descrição/Motivo: " + this.descricao + "\n"
-								+  "Valor da nota: " + this.valor + "\n"
-								+  "Imposto Federal: " + this.imposto.calcularImpostoFederal() + "\n"
-								+  "Imposto Estadual: " + this.imposto.calcularImpostoEstadual() + "\n"
-								+  "Valor com os Impostos: " + this.valorComImposto + "\n"
-								+  "Situação: " + situacao + "\n";
-		
+
+		String situacao = (isCancelada()) ? "Cancelada" : "Autorizada";
+
+		SimpleDateFormat formatarData = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		String notaFiscalEmTexto = "\n" + "Número da Nota: " + this.numero + "\n" + "Descrição/Motivo: "
+				+ this.descricao + "\n" + "Valor da nota: R$" + String.format("%.2f", this.valor) + "\n"
+				+ "Data de Emissão: " + formatarData.format(this.dataEmissao) + "\n" + "Imposto Federal: R$"
+				+ String.format("%.2f", this.imposto.calcularImpostoFederal()) + "\n" + "Imposto Estadual: R$"
+				+ String.format("%.2f", this.imposto.calcularImpostoEstadual()) + "\n" + "Valor com os Impostos: R$"
+				+ String.format("%.2f", this.valorComImposto) + "\n" + "Situação: " + situacao + "\n";
+
 		return notaFiscalEmTexto;
 
+	}
+
+	// implementar depois
+	@Override
+	public int compareTo(NotaFiscal o) {
+		if (this.valor > o.valor) {
+		}
+		return 0;
 	}
 }

@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Classe principal onde roda todas as funcionalidades do sistema
+ * 
  * @author ViníciusAraújo
  *
  */
@@ -32,7 +35,7 @@ public class Principal {
 
 		// System.out.println(e1.equals(e2));
 
-		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Consultar Dados de um" , "Excluir Empresa", "Lançar Nota Fiscal" };
+		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal" };
 
 		Boolean continuar = true;
 
@@ -66,7 +69,8 @@ public class Principal {
 					Empresa empresaLancamentoNota = encontrarEmpresaPeloCNPJ();
 					NotaFiscal notaFiscalGerada = gerarNotaFiscal();
 
-					empresaLancamentoNota.notas.add(notaFiscalGerada);
+					verificarNumeracao(notaFiscalGerada, empresaLancamentoNota);
+
 					System.out.println("Nota Fiscal Autorizada e Processada com Sucesso!");
 					System.out.println(notaFiscalGerada);
 				} catch (Excessao e) {
@@ -74,6 +78,16 @@ public class Principal {
 				}
 				break;
 			case 5:
+				// CANCELAR NOTA FISCAL
+				try {
+					Empresa empresaDaNota = encontrarEmpresaPeloCNPJ();
+					Integer numeroDaNota = Console.recuperaInteiro("Digite o número da nota que deseja cancelar.");
+					NotaFiscal notaCancelamento = encontrarNotaFiscal(empresaDaNota, numeroDaNota);
+					
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
+
 				break;
 			case 6:
 				break;
@@ -144,6 +158,31 @@ public class Principal {
 
 	}
 
+	private static void verificarNumeracao(NotaFiscal novaNotaFiscal, Empresa empresaLancamento) throws Excessao {
+		for (NotaFiscal notaFiscal : empresaLancamento.notas) {
+			if (notaFiscal.equals(novaNotaFiscal)) {
+				throw new Excessao("Número já utilizado");
+			}
+		}
+		empresaLancamento.notas.add(novaNotaFiscal);
+	}
+
+	private static NotaFiscal encontrarNotaFiscal(Empresa empresaDaNota, Integer numeroDaNota) throws Excessao {
+		for (NotaFiscal notaFiscal : empresaDaNota.notas) {
+			if (notaFiscal.getNumero() == numeroDaNota) {
+				return notaFiscal;
+			}
+		}
+		throw new Excessao("Nota fiscal não encontrada.");
+	}
+	
+	private static void cancelarNotaFiscal(NotaFiscal notaFiscalCancelamento) {
+		// TA TUDO ERRADO O CANCELAMENTO
+		// Deve ser possível cancelar uma nota fiscal. O usuário deve selecionar a opção de
+		// cancelamento e selecionar a nota fiscal de uma empresa. Busque as notas de
+		// uma empresa e apresente na tela para o usuário selecionar qual deseja cancelar. 
+	}
+	
 	private static Imposto verificarEstado(Double valor) {
 		String[] UFs = { "Paraná", "Santa Catarina", "São Paulo" };
 
@@ -167,4 +206,5 @@ public class Principal {
 		} while (continuar);
 		return null; // NUNCA VAI CAIR AQUI, COLOQUEI SÓ PRO JAVA COMPILAR
 	}
+
 }
