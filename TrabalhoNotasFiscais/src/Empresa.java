@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * 
+ *  
  * Classe que representa a empresa
  * 
  * @author Augusto C�sar

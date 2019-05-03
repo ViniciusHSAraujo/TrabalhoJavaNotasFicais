@@ -1,7 +1,7 @@
 import java.sql.Date;
 
 /**
- * Classe que representa a Nota Fiscal
+ * Classe que representa a Nota Fiscal.
  * 
  * @author Augusto
  *

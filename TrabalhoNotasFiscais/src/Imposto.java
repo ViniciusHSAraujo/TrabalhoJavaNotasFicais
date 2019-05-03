@@ -1,6 +1,6 @@
 /**
  * 
- * Classe abstrata que representa o imposto.
+ * Classe abstrata que representa o imposto. 
  * 
  * @author Augusto C�sar
  * @author Paulo Henrique

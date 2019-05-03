@@ -1,5 +1,5 @@
 /**
-  * Classe que representa o imposto do Estado de Santa Catarina
+  * Classe que representa o imposto do Estado de Santa Catarina.
  * 
  * @author Augusto C�sar
  * @author Paulo Henrique

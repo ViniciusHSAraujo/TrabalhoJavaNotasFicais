@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * Classe específica para realizar opera��es de entrada e sa�da de dados no
- * Console.
+ * Console. 
  * 
  * @author Andre Pimenta
  * 

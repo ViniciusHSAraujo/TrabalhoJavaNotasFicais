@@ -1,6 +1,6 @@
 /**
  * 
- * Classe que representa o imposto do Estado do Paran�
+ * Classe que representa o imposto do Estado do Paran�.
  * 
  * @author Augusto C�sar
  * @author Paulo Henrique

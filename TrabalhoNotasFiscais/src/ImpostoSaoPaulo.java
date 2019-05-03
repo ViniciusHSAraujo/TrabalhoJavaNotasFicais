@@ -1,6 +1,6 @@
 /**
  * 
- * Classe que representa o imposto do Estado de S�o Paulo
+ * Classe que representa o imposto do Estado de S�o Paulo.
  * 
  * @author Augusto C�sar
  * @author Paulo Henrique

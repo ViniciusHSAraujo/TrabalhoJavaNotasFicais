@@ -1,5 +1,9 @@
 import java.util.ArrayList;
-
+/**
+ * Classe principal onde roda todas as funcionalidades do sistema
+ * @author ViníciusAraújo
+ *
+ */
 public class Principal {
 
 	static ArrayList<Empresa> empresas = new ArrayList<>();
@@ -28,7 +32,7 @@ public class Principal {
 
 		// System.out.println(e1.equals(e2));
 
-		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal" };
+		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Consultar Dados de um" , "Excluir Empresa", "Lançar Nota Fiscal" };
 
 		Boolean continuar = true;
 
@@ -161,7 +165,6 @@ public class Principal {
 			}
 
 		} while (continuar);
-		// NUNCA VAI CAIR AQUI, COLOQUEI SÓ PRO JAVA COMPILAR
-		return null;
+		return null; // NUNCA VAI CAIR AQUI, COLOQUEI SÓ PRO JAVA COMPILAR
 	}
 }
