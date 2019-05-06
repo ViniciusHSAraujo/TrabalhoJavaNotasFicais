@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Classe principal onde roda todas as funcionalidades do sistema
@@ -16,7 +17,9 @@ public class Principal {
 	public static void main(String[] args) {
 
 		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal",
-				"Cancelar Nota Fiscal", "Relatório: Notas Fiscais por Empresa", "Relatório: Notas Fiscais Canceladas por Empresa" };
+				"Cancelar Nota Fiscal", "Relatório: Notas Fiscais por Empresa",
+				"Relatório: Notas Fiscais Canceladas por Empresa",
+				"Relatório: Notas Fiscais Por Empresa (Ord.: valor)" };
 
 		Boolean continuar = true;
 
@@ -88,12 +91,16 @@ public class Principal {
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
-				;
 				break;
 			case 8:
+				try {
+					Empresa empresaDaNota = encontrarEmpresaPeloCNPJ();
+					listarNotasFiscaisPorValor(empresaDaNota);
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
 				break;
-			case 9:
-				break;
+
 			case -1:
 				System.out.println("Saindo..");
 				continuar = false;
@@ -243,7 +250,23 @@ public class Principal {
 		}
 		System.out.println("\n");
 	}
-	
+
+	/**
+	 * Método que varre o array de Notas Fiscais de uma empresa e imprime na tela
+	 * cada uma delas. ordenado por valor.
+	 * 
+	 * @param empresa - A empresa em que o sistema verificará as notas fiscais.
+	 */
+	private static void listarNotasFiscaisPorValor(Empresa empresa) {
+		System.out.println("--------------------------------");
+		Collections.sort(empresa.notas);
+		for (NotaFiscal notaFiscal : empresa.notas) {
+			System.out.println(notaFiscal);
+			System.out.println("--------------------------------");
+		}
+		System.out.println("\n");
+	}
+
 	/**
 	 * Método que busca uma nota fiscal pelo número dela em uma empresa.
 	 * 
@@ -296,5 +319,5 @@ public class Principal {
 		} while (continuar);
 		return null; // NUNCA VAI CAIR AQUI, COLOQUEI SÓ PRO JAVA COMPILAR
 	}
-	
+
 }
