@@ -1,5 +1,6 @@
 /**
  * Classe para tratamento de erros
+ * 
  * @author ViníciusAraújo
  *
  */

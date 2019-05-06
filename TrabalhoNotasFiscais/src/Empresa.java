@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- *  
+ * 
  * Classe que representa a empresa
  * 
  * @author Augusto CÔøΩsar
@@ -13,6 +13,7 @@ public class Empresa {
 
 	/**
 	 * Construtor de uma empresa completa, com nome e CNPJ.
+	 * 
 	 * @param nome
 	 * @param cnpj
 	 */
@@ -23,15 +24,18 @@ public class Empresa {
 
 		this.notas = new ArrayList<NotaFiscal>();
 	}
+
 	/**
-	 * Construtor de uma empresa somente com o CNPJ, utilizado na exclus√£o da empresa.
+	 * Construtor de uma empresa somente com o CNPJ, utilizado na exclus√£o da
+	 * empresa.
+	 * 
 	 * @param cnpj
 	 */
 	public Empresa(String cnpj) {
 
 		this.cnpj = cnpj;
 	}
-	
+
 	private String nome;
 	private String cnpj;
 
@@ -78,6 +82,13 @@ public class Empresa {
 		return true;
 	}
 
+	/**
+	 * MÈtodo que varre o array de notas fiscais da empresa e retorna um array
+	 * somente com as notas v·lidas. Entende-se como notas v·lidas, aquelas que n„o
+	 * constam como canceladas.
+	 * 
+	 * @return - As notas fiscais v·lidas da empresa em um array.
+	 */
 	public ArrayList<NotaFiscal> getNotasFiscaisValidas() {
 		ArrayList<NotaFiscal> notasValidas = new ArrayList<>();
 		for (NotaFiscal notaFiscal : this.notas) {
@@ -88,6 +99,12 @@ public class Empresa {
 		return notasValidas;
 	}
 
+	/**
+	 * MÈtodo que varre o array de notas fiscais da empresa e retorna um array
+	 * somente com as notas fiscais canceladas.
+	 * 
+	 * @return - As notas fiscais canceladas da empresa em um array.
+	 */
 	public ArrayList<NotaFiscal> getNotasFiscaisCanceladas() {
 		ArrayList<NotaFiscal> notasCanceladas = new ArrayList<>();
 		for (NotaFiscal notaFiscal : this.notas) {
@@ -97,12 +114,10 @@ public class Empresa {
 		}
 		return notasCanceladas;
 	}
-	
+
 	@Override
 	public String toString() {
-		String empresa = "\n" +
-						 "Nome da Empresa: " + this.nome + "\n" + 
-						 "CNPJ: " + this.cnpj + "\n\n";
+		String empresa = "\n" + "Nome da Empresa: " + this.nome + "\n" + "CNPJ: " + this.cnpj + "\n\n";
 		return empresa;
 	}
 }

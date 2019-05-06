@@ -122,14 +122,14 @@ public class Principal {
 	}
 
 	/**
-	 * Método que recebe uma empresa e verifica se ela deve ou não ser cadastrada no
-	 * sistema. Seu funcionamento se dá pela verificação se a empresa já existe,
-	 * caso não, ele cadastra no array "empresas", senão, retorna um erro informando
-	 * que o CNPJ já está cadastrado em outra empresa.
+	 * Método que recebe uma empresa e verifica se ela deve ou não ser cadastrada
+	 * no sistema. Seu funcionamento se dá pela verificação se a empresa já
+	 * existe, caso não, ele cadastra no array "empresas", senão, retorna um erro
+	 * informando que o CNPJ já está cadastrado em outra empresa.
 	 * 
 	 * @param novaEmpresa - Empreas a ser cadastrada
-	 * @throws Excessao - Caso o CNPJ já esteja cadastrado, retorna a mensagem "CNPJ
-	 *                  Existente".
+	 * @throws Excessao - Caso o CNPJ já esteja cadastrado, retorna a mensagem
+	 *                  "CNPJ Existente".
 	 */
 	private static void cadastrarEmpresa(Empresa novaEmpresa) throws Excessao {
 		for (Empresa empresa : empresas) {
@@ -202,8 +202,8 @@ public class Principal {
 	}
 
 	/**
-	 * Método que verifica se a numeração da Nota Fiscal já foi utilizada por outra
-	 * nota na mesma empresa, evitando duplicidade.
+	 * Método que verifica se a numeração da Nota Fiscal já foi utilizada por
+	 * outra nota na mesma empresa, evitando duplicidade.
 	 * 
 	 * @param novaNotaFiscal    - Nota Fiscal a ser incluída na empresa.
 	 * @param empresaLancamento - Empresa na qual a nota fiscal será incluída.
@@ -273,9 +273,9 @@ public class Principal {
 	 * @param empresaDaNota - Empresa em que o sistema procurará pela nota.
 	 * @param numeroDaNota  - Número da nota que o sistema deve procurar.
 	 * @return - Nota Fiscal com o número solicitado pelo usuário.
-	 * @throws Excessao - Caso não haja nenhuma nota na empresa com tal numeração, o
-	 *                  sistema retorna informando que não encontrou nenhuma nota
-	 *                  com tal numeração.
+	 * @throws Excessao - Caso não haja nenhuma nota na empresa com tal
+	 *                  numeração, o sistema retorna informando que não encontrou
+	 *                  nenhuma nota com tal numeração.
 	 */
 	private static NotaFiscal encontrarNotaFiscal(Empresa empresaDaNota, Integer numeroDaNota) throws Excessao {
 		for (NotaFiscal notaFiscal : empresaDaNota.notas) {

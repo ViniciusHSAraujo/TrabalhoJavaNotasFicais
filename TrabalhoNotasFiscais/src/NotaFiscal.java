@@ -113,6 +113,11 @@ public class NotaFiscal implements Comparable<NotaFiscal> {
 	@Override
 	public String toString() {
 
+		/**
+		 * Se a nota estiver cancelada (isCancelada = TRUE), situação receberá
+		 * "Cancelada", se a nota não estiver cancelada (isCancelada = FALSE) a nota
+		 * receberá "Autorizada" na impressão.
+		 */
 		String situacao = (isCancelada()) ? "Cancelada" : "Autorizada";
 
 		SimpleDateFormat formatarData = new SimpleDateFormat("dd/MM/yyyy HH:mm");

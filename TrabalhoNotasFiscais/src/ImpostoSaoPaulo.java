@@ -18,7 +18,11 @@ public class ImpostoSaoPaulo extends Imposto {
 		super(valor);
 	}
 
-	public double calcularImpostoEstadual(){
+	/**
+	 * Método que calcula o valor do imposto estadual de acordo com o valor da nota
+	 * e a alíquota do estado.
+	 */
+	public double calcularImpostoEstadual() {
 		return this.valor * aliquotaEstadual;
 	}
 }

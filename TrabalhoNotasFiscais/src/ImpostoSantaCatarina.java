@@ -1,5 +1,5 @@
 /**
-  * Classe que representa o imposto do Estado de Santa Catarina.
+ * Classe que representa o imposto do Estado de Santa Catarina.
  * 
  * @author Augusto Cï¿½sar
  * @author Paulo Henrique
@@ -15,10 +15,13 @@ public class ImpostoSantaCatarina extends Imposto {
 
 	public ImpostoSantaCatarina(Double valor) {
 		super(valor);
-		// TODO Auto-generated constructor stub
 	}
-	
-	public double calcularImpostoEstadual(){
+
+	/**
+	 * Método que calcula o valor do imposto estadual de acordo com o valor da nota
+	 * e a alíquota do estado.
+	 */
+	public double calcularImpostoEstadual() {
 		return this.valor * aliquotaEstadual;
 	}
 }

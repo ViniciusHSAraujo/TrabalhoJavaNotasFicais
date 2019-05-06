@@ -8,7 +8,7 @@
  *
  */
 public class ImpostoParana extends Imposto {
-	
+
 	/**
 	 * Alï¿½quota Estadual do Estado do Paranï¿½: 5%
 	 */
@@ -17,8 +17,12 @@ public class ImpostoParana extends Imposto {
 	public ImpostoParana(Double valor) {
 		super(valor);
 	}
-	
-	public double calcularImpostoEstadual(){
+
+	/**
+	 * Método que calcula o valor do imposto estadual de acordo com o valor da nota
+	 * e a alíquota do estado.
+	 */
+	public double calcularImpostoEstadual() {
 		return this.valor * aliquotaEstadual;
 	}
 }
