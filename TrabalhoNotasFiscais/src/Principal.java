@@ -20,7 +20,7 @@ public class Principal {
 		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal",
 				"Cancelar Nota Fiscal", "Relatório: Notas Fiscais por Empresa",
 				"Relatório: Notas Fiscais Canceladas por Empresa",
-				"Relatório: Notas Fiscais Por Empresa (Ord.: valor)" };
+				"Relatório: Notas Fiscais Por Empresa (Ord.: valor)", "Contabilizar Notas" };
 
 		Boolean continuar = true;
 
@@ -95,6 +95,15 @@ public class Principal {
 				try {
 					Empresa empresaDaNota = encontrarEmpresaPeloCNPJ();
 					listarNotasFiscaisPorValor(empresaDaNota);
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 9:
+				try {
+					Empresa empresaContabilizacaoDeNotas = encontrarEmpresaPeloCNPJ();
+					Double valorNotas = Contabilidade.realizarContabilizacao(empresaContabilizacaoDeNotas.getNotasFiscaisValidas());
+					System.out.println("A soma do valor das notas acima de R$5.000,00 da empresa é: R$" + String.format("%.2f", valorNotas));
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
