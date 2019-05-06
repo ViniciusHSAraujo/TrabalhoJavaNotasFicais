@@ -11,6 +11,7 @@ import java.util.Collections;
  */
 public class Principal {
 
+	private static final Double VALOR_MAXIMO_NF = 150000.00;
 	static ArrayList<Empresa> empresas = new ArrayList<>();
 	static Empresa empresa;
 
@@ -52,7 +53,7 @@ public class Principal {
 				try {
 					Empresa empresaLancamentoNota = encontrarEmpresaPeloCNPJ();
 					NotaFiscal notaFiscalGerada = gerarNotaFiscal();
-
+					verificarValorDaNota(notaFiscalGerada);
 					verificarNumeracao(notaFiscalGerada, empresaLancamentoNota);
 
 					System.out.println("Nota Fiscal Autorizada e Processada com Sucesso!");
@@ -216,6 +217,17 @@ public class Principal {
 		empresaLancamento.notas.add(novaNotaFiscal);
 	}
 
+	/**
+	 * Método que verifica o valor monetário da nota e retorna uma excessão caso o valor seja superior ao máximo permitido.
+	 * @param notaFiscal - Nota Fiscal que o usuário deseja incluir
+	 * @throws Excessao - Se o valor for superior ao máximo permitido, o sistema retorna uma mensagem informando que não é possível incluir a nota fiscal.
+	 */
+	private static void verificarValorDaNota(NotaFiscal notaFiscal) throws Excessao{
+		if (notaFiscal.getValor() > VALOR_MAXIMO_NF) {
+			throw new Excessao("Operação não permitida! Impossível emitir notas com valor superior a R$150.000,00");
+		}
+	}
+	
 	/**
 	 * Método que varre o array de Notas Fiscais de uma empresa e imprime na tela
 	 * cada uma delas.
