@@ -19,8 +19,8 @@ public class Principal {
 
 		String[] opcoes = { "Cadastrar Empresa", "Listar Empresas", "Excluir Empresa", "Lançar Nota Fiscal",
 				"Cancelar Nota Fiscal", "Relatório: Notas Fiscais por Empresa",
-				"Relatório: Notas Fiscais Canceladas por Empresa",
-				"Relatório: Notas Fiscais Por Empresa (Ord.: valor)", "Contabilizar Notas" };
+				"Relatório: Notas Fiscais Canceladas por Empresa", "Relatório: Notas Fiscais Por Empresa (Ord.: valor)",
+				"Contabilizar Notas", "Cancelamento de Notas em Lote" };
 
 		Boolean continuar = true;
 
@@ -102,11 +102,24 @@ public class Principal {
 			case 9:
 				try {
 					Empresa empresaContabilizacaoDeNotas = encontrarEmpresaPeloCNPJ();
-					Double valorNotas = Contabilidade.realizarContabilizacao(empresaContabilizacaoDeNotas.getNotasFiscaisValidas());
-					System.out.println("A soma do valor das notas acima de R$5.000,00 da empresa é: R$" + String.format("%.2f", valorNotas));
+					Double valorNotas = Contabilidade
+							.realizarContabilizacao(empresaContabilizacaoDeNotas.getNotasFiscaisValidas());
+					System.out.println("A soma do valor das notas acima de R$5.000,00 da empresa é: R$"
+							+ String.format("%.2f", valorNotas));
 				} catch (Excessao e) {
 					System.out.println(e.getMessage());
 				}
+				break;
+			case 10:
+				try {
+					Empresa empresaCancelamentoEmLote = encontrarEmpresaPeloCNPJ();
+					Double valorMaximo = Console
+							.recuperaDecimal("O sistema deve cancelar as notas que sejam abaixo de qual valor?");
+					cancelarNotasEmLote(empresaCancelamentoEmLote, valorMaximo);
+				} catch (Excessao e) {
+					System.out.println(e.getMessage());
+				}
+
 				break;
 			case -1:
 				System.out.println("Saindo..");
@@ -114,6 +127,26 @@ public class Principal {
 				break;
 			}
 		} while (continuar);
+	}
+
+	/**
+	 * Método que realiza o cancelamento de notas em lote, cancelando todas as notas abaixo do valor informado pelo usuário.
+	 * @param empresa - Empresa em que devem ser canceladas as notas.
+	 * @param valor - Valor máximo das notas a serem canceladas.
+	 * @throws Excessao - Caso não haja nenhuma nota válida na empresa.
+	 */
+	private static void cancelarNotasEmLote(Empresa empresa, Double valor) throws Excessao {
+		if (empresa.getNotasFiscaisValidas().size() == 0) {
+			throw new Excessao("Essa empresa não contém nenhuma nota válida.");
+		} else {
+			for (NotaFiscal notaFiscal : empresa.getNotasFiscaisValidas()) {
+				if (notaFiscal.getValor() < valor) {
+					notaFiscal.setCancelada(true);
+					System.out.println("A nota fiscal " + notaFiscal.getNumero() + " foi cancelada.\n");
+				}
+			}
+
+		}
 	}
 
 	/**
@@ -227,16 +260,20 @@ public class Principal {
 	}
 
 	/**
-	 * Método que verifica o valor monetário da nota e retorna uma excessão caso o valor seja superior ao máximo permitido.
+	 * Método que verifica o valor monetário da nota e retorna uma excessão caso o
+	 * valor seja superior ao máximo permitido.
+	 * 
 	 * @param notaFiscal - Nota Fiscal que o usuário deseja incluir
-	 * @throws Excessao - Se o valor for superior ao máximo permitido, o sistema retorna uma mensagem informando que não é possível incluir a nota fiscal.
+	 * @throws Excessao - Se o valor for superior ao máximo permitido, o sistema
+	 *                  retorna uma mensagem informando que não é possível incluir a
+	 *                  nota fiscal.
 	 */
-	private static void verificarValorDaNota(NotaFiscal notaFiscal) throws Excessao{
+	private static void verificarValorDaNota(NotaFiscal notaFiscal) throws Excessao {
 		if (notaFiscal.getValor() > VALOR_MAXIMO_NF) {
 			throw new Excessao("Operação não permitida! Impossível emitir notas com valor superior a R$150.000,00");
 		}
 	}
-	
+
 	/**
 	 * Método que varre o array de Notas Fiscais de uma empresa e imprime na tela
 	 * cada uma delas.
