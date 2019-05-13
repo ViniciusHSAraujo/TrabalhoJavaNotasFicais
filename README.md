@@ -10,6 +10,7 @@ Projeto referente ao trabalho da disciplina de Java da Universidade Positivo do 
 
 ## Contribuidores
 O desenvolvimento das funcionalidades do sistema foram realizados pelos alunos:
+
 Vinícius Henrique Santos Araújo
 
 Paulo Henrique 
