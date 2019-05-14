@@ -13,6 +13,6 @@ O desenvolvimento das funcionalidades do sistema foram realizados pelos alunos:
 
 Vinícius Henrique Santos Araújo
 
-Paulo Henrique 
+Paulo Henrique dos Santos Hainosz 
 
-Augusto César de Oliveira
+Augusto César Faria de Oliveira
